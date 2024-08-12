@@ -26,8 +26,8 @@ public class ShooterIOTalonFX implements ShooterIO {
             false);
     
     public ShooterIOTalonFX(){
-        leftTalon = new TalonFX(Constants.LEFT_TALON_PORT, Constants.CANIVORE_NAME);
-        rightTalon = new TalonFX(Constants.RIGHT_TALON_PORT, Constants.CANIVORE_NAME);
+        leftTalon = new TalonFX(Constants.SHOOTER_CONSTANTS.LEFT_TALON_PORT, Constants.CANIVORE_NAME);
+        rightTalon = new TalonFX(Constants.SHOOTER_CONSTANTS.RIGHT_TALON_PORT, Constants.CANIVORE_NAME);
         config = new TalonFXConfiguration();
         config.MotorOutput.NeutralMode = NeutralModeValue.Coast;
         config.CurrentLimits.SupplyCurrentLimitEnable = true;
@@ -55,8 +55,8 @@ public class ShooterIOTalonFX implements ShooterIO {
         inputs.rightVoltage = rightTalon.getMotorVoltage().getValueAsDouble();
         inputs.leftTemp = leftTalon.getDeviceTemp().getValueAsDouble();
         inputs.rightTemp = rightTalon.getDeviceTemp().getValueAsDouble();
-        inputs.leftRPM = (leftTalon.getVelocity().getValueAsDouble() * 60) * Constants.SHOOTER_GEAR_RATO;
-        inputs.rightRPM = (rightTalon.getVelocity().getValueAsDouble() * 60) * Constants.SHOOTER_GEAR_RATO;
+        inputs.leftRPM = (leftTalon.getVelocity().getValueAsDouble() * 60) * Constants.SHOOTER_CONSTANTS.SHOOTER_GEAR_RATO; // Converting from motor rps to rpm, then converting from motor rpm to flywheel rpm
+        inputs.rightRPM = (rightTalon.getVelocity().getValueAsDouble() * 60) * Constants.SHOOTER_CONSTANTS.SHOOTER_GEAR_RATO;
         
     }
 

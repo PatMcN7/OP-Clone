@@ -24,8 +24,8 @@ public class ShooterIOTalonFX implements ShooterIO {
             false);
     private final VelocityVoltage rightTalonVelocityVoltage = new VelocityVoltage(0, 0, true, 0, SLOT, false, false,
             false);
-    
-    public ShooterIOTalonFX(){
+
+    public ShooterIOTalonFX() {
         leftTalon = new TalonFX(Constants.LEFT_TALON_PORT, Constants.CANIVORE_NAME);
         rightTalon = new TalonFX(Constants.RIGHT_TALON_PORT, Constants.CANIVORE_NAME);
         config = new TalonFXConfiguration();
@@ -37,7 +37,7 @@ public class ShooterIOTalonFX implements ShooterIO {
         config.Voltage.PeakForwardVoltage = 12.0;
         config.Voltage.PeakReverseVoltage = -12.0;
         config.ClosedLoopRamps.VoltageClosedLoopRampPeriod = 0.02;
-        
+
         config.Slot0.kV = 0.18; // recalc gain estimation, sysid needed obv
         config.Slot0.kP = 0.;
 
@@ -55,13 +55,24 @@ public class ShooterIOTalonFX implements ShooterIO {
         inputs.rightVoltage = rightTalon.getMotorVoltage().getValueAsDouble();
         inputs.leftTemp = leftTalon.getDeviceTemp().getValueAsDouble();
         inputs.rightTemp = rightTalon.getDeviceTemp().getValueAsDouble();
-        inputs.leftRPM = (leftTalon.getVelocity().getValueAsDouble() * 60) * Constants.SHOOTER_GEAR_RATO;
-        inputs.rightRPM = (rightTalon.getVelocity().getValueAsDouble() * 60) * Constants.SHOOTER_GEAR_RATO;
-        
+        inputs.leftRPM = (leftTalon.getVelocity().getValueAsDouble() * 60) * Constants.SHOOTER_GEAR_RATIO;
+        inputs.rightRPM = (rightTalon.getVelocity().getValueAsDouble() * 60) * Constants.SHOOTER_GEAR_RATIO;
+
     }
 
     @Override
     public void setVoltage(double leftAppliedVoltage, double rightAppliedVoltage) {
         leftTalon.setControl(leftTalonVoltageOut.withOutput(leftAppliedVoltage));
+        rightTalon.setControl(rightTalonVoltageOut.withOutput(rightAppliedVoltage));
+    }
+
+    @Override
+    public void setRPM(double leftTargetRPM, double rightTargetRPM){
+        double leftApplied = leftTargetRPM / Constants.SHOOTER_GEAR_RATIO / 60; // converting between rpm of flywheel to rps of motor
+        double rightApplied = rightTargetRPM / Constants.SHOOTER_GEAR_RATIO / 60;
+
+        leftTalon.setControl(leftTalonVelocityVoltage.withVelocity(leftApplied));
+        rightTalon.setControl(rightTalonVelocityVoltage.withVelocity(rightApplied));
+
     }
 }

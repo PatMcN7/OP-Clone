@@ -1,7 +1,6 @@
 package frc.robot.subsystems.shooter;
 
 import com.ctre.phoenix6.configs.TalonFXConfiguration;
-import com.ctre.phoenix6.configs.TalonFXConfigurator;
 import com.ctre.phoenix6.controls.VelocityVoltage;
 import com.ctre.phoenix6.controls.VoltageOut;
 import com.ctre.phoenix6.hardware.TalonFX;
@@ -55,8 +54,8 @@ public class ShooterIOTalonFX implements ShooterIO {
         inputs.rightVoltage = rightTalon.getMotorVoltage().getValueAsDouble();
         inputs.leftTemp = leftTalon.getDeviceTemp().getValueAsDouble();
         inputs.rightTemp = rightTalon.getDeviceTemp().getValueAsDouble();
-        inputs.leftRPM = (leftTalon.getVelocity().getValueAsDouble() * 60) * Constants.SHOOTER_CONSTANTS.SHOOTER_GEAR_RATO; // Converting from motor rps to rpm, then converting from motor rpm to flywheel rpm
-        inputs.rightRPM = (rightTalon.getVelocity().getValueAsDouble() * 60) * Constants.SHOOTER_CONSTANTS.SHOOTER_GEAR_RATO;
+        inputs.leftRPM = (leftTalon.getVelocity().getValueAsDouble() * 60) * Constants.SHOOTER_CONSTANTS.SHOOTER_GEAR_RATIO; // Converting from motor rps to rpm, then converting from motor rpm to flywheel rpm
+        inputs.rightRPM = (rightTalon.getVelocity().getValueAsDouble() * 60) * Constants.SHOOTER_CONSTANTS.SHOOTER_GEAR_RATIO;
 
     }
 
@@ -68,8 +67,8 @@ public class ShooterIOTalonFX implements ShooterIO {
 
     @Override
     public void setRPM(double leftTargetRPM, double rightTargetRPM){
-        double leftApplied = leftTargetRPM / Constants.SHOOTER_GEAR_RATIO / 60; // converting between rpm of flywheel to rps of motor
-        double rightApplied = rightTargetRPM / Constants.SHOOTER_GEAR_RATIO / 60;
+        double leftApplied = leftTargetRPM / Constants.SHOOTER_CONSTANTS.SHOOTER_GEAR_RATIO / 60; // converting between rpm of flywheel to rps of motor
+        double rightApplied = rightTargetRPM / Constants.SHOOTER_CONSTANTS.SHOOTER_GEAR_RATIO / 60;
 
         leftTalon.setControl(leftTalonVelocityVoltage.withVelocity(leftApplied));
         rightTalon.setControl(rightTalonVelocityVoltage.withVelocity(rightApplied));

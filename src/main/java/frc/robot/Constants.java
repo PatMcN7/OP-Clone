@@ -24,12 +24,15 @@ public final class Constants {
         public static final double LEFT_EJECT_RPM = 0.;
         public static final double RIGHT_EJECT_RPM = 0.;
         public static final double ROLLER_RADIUS_METERS = 0.051;
+        public static final double ACCEPTABLE_RPM_ERROR = 0;
     
     }
 
     public static final class CARTRIDGE_CONSTANTS {}
 
-    public static final class ARM_CONSANTS {}
+    public static final class ARM_CONSTANTS {
+
+        public static final int MOTOR_ID = 0;}
 
     public static final class BELTWRAP_CONSTANTS {}
 

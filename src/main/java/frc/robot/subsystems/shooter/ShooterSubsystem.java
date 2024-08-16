@@ -6,13 +6,13 @@ package frc.robot.subsystems.shooter;
 
 import org.littletonrobotics.junction.Logger;
 
+import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 import frc.robot.RobotContainer;
 
-
-public class Shooter extends SubsystemBase {
+public class ShooterSubsystem extends SubsystemBase {
 
   private final RobotContainer container;
   private final ShooterIO io;
@@ -32,10 +32,10 @@ public class Shooter extends SubsystemBase {
     IS_EJECTING
   }
 
-  private WantedState wantedState = WantedState.SCORING;
-  private SystemState systemState = SystemState.IS_SCORING;
+  private WantedState wantedState = WantedState.OFF;
+  private SystemState systemState = SystemState.IS_OFF;
 
-  public Shooter(ShooterIO io, RobotContainer container) {
+  public ShooterSubsystem(ShooterIO io, RobotContainer container) {
     this.io = io;
     this.container = container;
   }
@@ -96,5 +96,19 @@ public class Shooter extends SubsystemBase {
 
   private void handleEjecting() {
     io.setRPM(Constants.SHOOTER_CONSTANTS.LEFT_EJECT_RPM, Constants.SHOOTER_CONSTANTS.RIGHT_EJECT_RPM);
+  }
+
+  public boolean atScoreSetpoint() {
+    return MathUtil.isNear(Constants.SHOOTER_CONSTANTS.LEFT_SCORE_RPM, inputs.leftRPM, Constants.SHOOTER_CONSTANTS.ACCEPTABLE_RPM_ERROR) 
+    && MathUtil.isNear(Constants.SHOOTER_CONSTANTS.RIGHT_SCORE_RPM, inputs.rightRPM, Constants.SHOOTER_CONSTANTS.ACCEPTABLE_RPM_ERROR);
+  }
+
+  public boolean atFeedSetpoint() {
+    return MathUtil.isNear(Constants.SHOOTER_CONSTANTS.LEFT_FEED_RPM, inputs.leftRPM, Constants.SHOOTER_CONSTANTS.ACCEPTABLE_RPM_ERROR)
+    && MathUtil.isNear(Constants.SHOOTER_CONSTANTS.RIGHT_FEED_RPM, inputs.rightRPM, Constants.SHOOTER_CONSTANTS.ACCEPTABLE_RPM_ERROR);
+  }
+
+  public void setWantedState(WantedState wantedState) {
+    this.wantedState = wantedState;
   }
 }

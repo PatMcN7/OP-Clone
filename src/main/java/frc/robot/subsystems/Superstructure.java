@@ -5,10 +5,17 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.subsystems.shooter.ShooterSubsystem;
 
 public class Superstructure extends SubsystemBase {
+  private ShooterSubsystem shooter;
+
+  public enum WantedSuperState {}
+  public enum CurrentSuperState {}
+
   /** Creates a new Superstructure. */
-  public Superstructure() {}
+  public Superstructure() {}  // This is going to be a very large class that I plan to write after finishing every subsystem. 
+                              // I suppose you could write the superstates first but I'm not sure what I want them to look like yet
 
   @Override
   public void periodic() {

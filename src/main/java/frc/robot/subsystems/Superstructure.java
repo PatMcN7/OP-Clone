@@ -5,10 +5,12 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.subsystems.arm.ArmSubsystem;
 import frc.robot.subsystems.shooter.ShooterSubsystem;
 
 public class Superstructure extends SubsystemBase {
   private ShooterSubsystem shooter;
+  private ArmSubsystem arm;
 
   public enum WantedSuperState {}
   public enum CurrentSuperState {}

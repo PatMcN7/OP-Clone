@@ -31,8 +31,8 @@ public final class Constants {
     public static final class CARTRIDGE_CONSTANTS {}
 
     public static final class ARM_CONSTANTS {
-
-        public static final int MOTOR_ID = 0;}
+        public static final int MOTOR_ID = 0;
+    }
 
     public static final class BELTWRAP_CONSTANTS {}
 

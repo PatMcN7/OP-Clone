@@ -4,10 +4,6 @@ import org.littletonrobotics.junction.AutoLog;
 
 
 public interface ArmIO {
-    
-
-    default void setVoltage(double voltage) {}
-
     default void setPosition(double position) {}
 
     default void updateInputs(ArmIOInputs inputs) {}

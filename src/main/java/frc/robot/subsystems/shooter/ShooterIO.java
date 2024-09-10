@@ -12,13 +12,13 @@ public interface ShooterIO {
 
     @AutoLog
     class ShooterIOInputs{
-        public double leftCurrent;
-        public double rightCurrent;
-        public double leftVoltage;
-        public double rightVoltage;
-        public double leftRPM;
-        public double rightRPM;
-        public double leftTemp;
-        public double rightTemp;
+        public double leftCurrent = 0.;
+        public double rightCurrent = 0.;
+        public double leftVoltage = 0.;
+        public double rightVoltage = 0.;
+        public double leftRPM = 0.;
+        public double rightRPM = 0.;
+        public double leftTemp = 0.;
+        public double rightTemp = 0.;
     }
 }

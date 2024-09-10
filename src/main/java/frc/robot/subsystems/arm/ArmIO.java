@@ -10,8 +10,9 @@ public interface ArmIO {
 
     @AutoLog
     class ArmIOInputs {
-        public double armPosition;
-        public double armVoltage;
-        public double armCurrent;
+        public double armPosition = .0;
+        public double armVoltage = .0;
+        public double armCurrent = .0;
+        public boolean beamBreakTripped = false;
     }
 }

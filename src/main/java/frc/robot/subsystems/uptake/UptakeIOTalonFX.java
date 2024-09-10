@@ -1,6 +1,6 @@
 package frc.robot.subsystems.uptake;
 
-public class UptakeIOSparkMax implements UptakeIO{
+public class UptakeIOTalonFX implements UptakeIO{
     
     @Override
     public void setVoltage(double voltage) {

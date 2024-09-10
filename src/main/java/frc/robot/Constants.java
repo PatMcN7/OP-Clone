@@ -32,6 +32,16 @@ public final class Constants {
 
     public static final class ARM_CONSTANTS {
         public static final int MOTOR_ID = 0;
+        public static final double kV = 0.;
+        public static final double kS = 0.;
+        public static final double kA = 0.;
+        public static final double kP = 0.;
+        public static final double kI = 0.;
+        public static final double kD = 0.;
+        public static final double MM_ACCEL = 0.;
+        public static final double MM_CRUISE = 0.;
+        public static final double MM_JERK = 0.;
+
     }
 
     public static final class BELTWRAP_CONSTANTS {}
